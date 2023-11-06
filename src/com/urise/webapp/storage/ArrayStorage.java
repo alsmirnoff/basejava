@@ -9,7 +9,7 @@ public class ArrayStorage {
     private Resume[] storage = new Resume[10000];
     private int size;
 
-    public int indexOf(String uuid) {
+    private int indexOf(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) return i;
         }
@@ -24,42 +24,38 @@ public class ArrayStorage {
     }
 
     public void update(Resume resume) {
-        if (indexOf(resume.getUuid()) < 0) System.out.println("ERROR: resume " + resume + " not found!");
+        int index = indexOf(resume.getUuid());
+        if (index < 0) System.out.println("ERROR: resume " + resume + " not exist!");
         else {
-            storage[indexOf(resume.getUuid())] = resume;
+            storage[index] = resume;
         }
     }
 
     public void save(Resume resume) {
         if (indexOf(resume.getUuid()) > 0) System.out.println("ERROR: resume " + resume + " already exist!");
-        else {
-            if (size + 1 > storage.length) System.out.println("ERROR: storage overfilled!");
+        else if (size == storage.length) System.out.println("ERROR: storage overflow!");
             else {
                 storage[size] = resume;
                 size++;
             }
-        }
     }
 
     public Resume get(String uuid) {
-        if (indexOf(uuid) < 0) System.out.println("ERROR: resume " + uuid + " not found!");
-        else {
-            return storage[indexOf(uuid)];
+        int index = indexOf(uuid);
+        if (index < 0) {
+            System.out.println("ERROR: resume " + uuid + " not exist!");
+            return null;
         }
-        return null;
+            return storage[index];
     }
 
     public void delete(String uuid) {
-        if (indexOf(uuid) < 0) System.out.println("ERROR: resume " + uuid + " not found!");
+        int index = indexOf(uuid);
+        if (index < 0) System.out.println("ERROR: resume " + uuid + " not exist!");
         else {
-            for (int i = 0; i < size; i++) {
-                if (uuid.equals(storage[i].getUuid())) {
-                    storage[i] = storage[size - 1];
-                    storage[size - 1] = null;
-                    size--;
-                    break;
-                }
-            }
+            storage[index] = storage[size - 1];
+            storage[size - 1] = null;
+            size--;
         }
     }
 
@@ -68,7 +64,7 @@ public class ArrayStorage {
      */
     public Resume[] getAll() {
         Resume[] allResume = new Resume[size];
-        for (int i = 0; i < allResume.length; i++) {
+        for (int i = 0; i < size; i++) {
             allResume[i] = storage[i];
         }
         return allResume;
