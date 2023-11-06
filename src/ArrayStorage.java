@@ -22,7 +22,7 @@ public class ArrayStorage {
     void update(Resume resume) {
         if (indexOf(resume.uuid) < 0) System.out.println("ERROR: resume " + resume + " not found!");
         else {
-            storage[indexOf(resume.uuid)].uuid = "uuid999";
+            storage[indexOf(resume.uuid)] = resume;
         }
     }
 
