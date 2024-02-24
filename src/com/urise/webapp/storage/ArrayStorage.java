@@ -6,12 +6,8 @@ import java.util.Arrays;
 
 /**
  * Array based storage for Resumes
- * test
  */
-public class ArrayStorage implements Storage{
-    private static final int STORAGE_LIMIT = 10000;
-    private Resume[] storage = new Resume[STORAGE_LIMIT];
-    private int size;
+public class ArrayStorage extends AbstractArrayStorage{
 
     private int indexOf(String uuid) {
         for (int i = 0; i < size; i++) {
@@ -66,9 +62,5 @@ public class ArrayStorage implements Storage{
      */
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
-    }
-
-    public int size() {
-        return size;
     }
 }
