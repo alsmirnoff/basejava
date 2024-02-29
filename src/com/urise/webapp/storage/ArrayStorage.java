@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class ArrayStorage extends AbstractArrayStorage{
 
-    private int indexOf(String uuid) {
+    protected int indexOf(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) return i;
         }
@@ -36,15 +36,6 @@ public class ArrayStorage extends AbstractArrayStorage{
                 storage[size] = resume;
                 size++;
             }
-    }
-
-    public Resume get(String uuid) {
-        int index = indexOf(uuid);
-        if (index < 0) {
-            System.out.println("ERROR: resume " + uuid + " not exist!");
-            return null;
-        }
-            return storage[index];
     }
 
     public void delete(String uuid) {
