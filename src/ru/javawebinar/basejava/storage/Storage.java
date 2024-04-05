@@ -1,11 +1,12 @@
-package com.urise.webapp.storage;
+package ru.javawebinar.basejava.storage;
 
-import com.urise.webapp.model.Resume;
+import ru.javawebinar.basejava.model.Resume;
 
 /**
  * Array based storage for Resumes
  */
 public interface Storage {
+
     void clear();
 
     void update(Resume resume);
@@ -16,9 +17,6 @@ public interface Storage {
 
     void delete(String uuid);
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
     Resume[] getAll();
 
     int size();
