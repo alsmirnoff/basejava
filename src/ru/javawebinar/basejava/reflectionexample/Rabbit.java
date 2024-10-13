@@ -1,9 +1,10 @@
 package ru.javawebinar.basejava.reflectionexample;
 
+@RabbitAnnotation(name = "test name")
 public class Rabbit {
     
     @Deprecated
-    @RabbitAnnotation
+    //@RabbitAnnotation
     private String rabbitName;
 
     @Deprecated
@@ -12,6 +13,12 @@ public class Rabbit {
 
     //@RabbitAnnotation
     protected double rabbitHeight;
+
+    public Rabbit() {}
+
+    public Rabbit(String name) {
+        this.rabbitName = name;
+    }
     
     public String getRabbitName() {
         return rabbitName;
@@ -22,7 +29,4 @@ public class Rabbit {
     public double getRabbitHeight() {
         return rabbitHeight;
     }
-
-    
-
 }

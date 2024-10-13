@@ -2,13 +2,20 @@ package ru.javawebinar.basejava.storage;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
+
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
 import static org.junit.Assert.*;
 
 public abstract class AbstractArrayStorageTest {
-    private Storage storage/* = new ArrayStorage()*/;
+    private Storage storage;
+    public AbstractArrayStorageTest(Storage storage) {
+        this.storage = storage;
+    }
+
+    //private Storage storage = new ArrayStorage();
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
@@ -20,36 +27,40 @@ public abstract class AbstractArrayStorageTest {
         storage.save(new Resume(UUID_3));
     }
 
-    @org.junit.Test
+    @Test
     public void size() {
+        System.out.println("size in abstract");
         Assert.assertEquals(3, storage.size());
     }
 
-    @org.junit.Test
+    @Test
     public void clear() {
+        System.out.println("clear in abstract");
+        storage.clear();
+        Assert.assertEquals(0, storage.size());
     }
 
-    @org.junit.Test
+    @Test
     public void update() {
     }
 
-    @org.junit.Test
+    @Test
     public void getAll() {
     }
 
-    @org.junit.Test
+    @Test
     public void save() {
     }
 
-    @org.junit.Test
+    @Test
     public void delete() {
     }
 
-    @org.junit.Test
+    @Test
     public void get() {
     }
 
-    @org.junit.Test(expected = NotExistStorageException.class)
+    @Test(expected = NotExistStorageException.class)
     public void getNotExist() throws Exception {
         storage.get("dummy");
     }
