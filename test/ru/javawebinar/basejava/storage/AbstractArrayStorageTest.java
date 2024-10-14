@@ -19,6 +19,7 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
+    private static final String UUID_4 = "uuid4";
     @Before
     public void setUp() throws Exception {
         storage.clear();
@@ -46,6 +47,16 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
+        System.out.println("get in abstract");
+        Resume [] resumes = {new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
+        Assert.assertArrayEquals(resumes, storage.getAll());
+    }
+
+    @Test
+    public void getNotAll() {
+        System.out.println("getNotAll in abstract");
+        Resume [] resumes = {new Resume(UUID_1), new Resume(UUID_2)};
+        Assert.assertArrayEquals(resumes, storage.getAll());
     }
 
     @Test
@@ -58,10 +69,13 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void get() {
+        System.out.println("get in abstract");
+        Assert.assertEquals(new Resume(UUID_1), storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)
     public void getNotExist() throws Exception {
+        System.out.println("getNotExist in abstract");
         storage.get("dummy");
     }
 }

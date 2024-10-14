@@ -22,16 +22,16 @@ public class MainTestArrayStorage {
         System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
 
-        System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
+        //System.out.println("Get dummy: " + ARRAY_STORAGE.get("dummy"));
 
         //System.out.println("Index of r2: " + Arrays.binarySearch(ARRAY_STORAGE.storage, 0, ARRAY_STORAGE.size(), r3));
 
         System.out.println("---All---------------------------");
         printAll();
 
-        System.out.println("---Update-non-existed------------");
+        /*System.out.println("---Update-non-existed------------");
         ARRAY_STORAGE.update(r4);
-        printAll();
+        printAll();*/
 
         System.out.println("---Update-existed----------------");
         ARRAY_STORAGE.update(r2);
