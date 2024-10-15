@@ -1,12 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
-import static org.junit.Assert.*;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
-//@RunWith(Parameterized.class)
 public class ArrayStorageTest extends AbstractArrayStorageTest {
+
     public ArrayStorageTest() {
         super(new ArrayStorage());
     }

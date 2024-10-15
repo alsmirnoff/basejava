@@ -1,16 +1,20 @@
 package ru.javawebinar.basejava.storage;
 
+import org.junit.Test;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.After;
 
+import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
+import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
 import static org.junit.Assert.*;
 
 public abstract class AbstractArrayStorageTest {
     private Storage storage;
+    protected static final int STORAGE_LIMIT = 10000;
     public AbstractArrayStorageTest(Storage storage) {
         this.storage = storage;
     }
@@ -20,12 +24,18 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_2 = "uuid2";
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
+
     @Before
     public void setUp() throws Exception {
         storage.clear();
         storage.save(new Resume(UUID_1));
         storage.save(new Resume(UUID_2));
         storage.save(new Resume(UUID_3));
+    }
+
+    @After
+    public void tearDown() {
+        storage.clear();
     }
 
     @Test
@@ -52,15 +62,23 @@ public abstract class AbstractArrayStorageTest {
         Assert.assertArrayEquals(resumes, storage.getAll());
     }
 
-    @Test
-    public void getNotAll() {
-        System.out.println("getNotAll in abstract");
-        Resume [] resumes = {new Resume(UUID_1), new Resume(UUID_2)};
-        Assert.assertArrayEquals(resumes, storage.getAll());
+    @Test(expected = StorageException.class)
+    public void save() {
+        storage.clear();
+        try {
+            for (int i = 0; i < STORAGE_LIMIT; i++) {
+                storage.save(new Resume("UUID_" + i));
+            }
+        }
+        catch (Exception e) {
+            fail("ERROR: Storage overflowing before reaching the limit!");
+        }
+        storage.save(new Resume("UUID_" + STORAGE_LIMIT ));
     }
 
-    @Test
-    public void save() {
+    @Test(expected = ExistStorageException.class)
+    public void saveExisted() {
+        storage.save(new Resume(UUID_1));
     }
 
     @Test
