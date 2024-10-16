@@ -7,18 +7,23 @@ public class SortedArrayStorageTest extends AbstractArrayStorageTest {
     }
 
     @Override
+    public void size() {
+        super.size();
+    }
+    
+    @Override
     public void clear() {
         super.clear();
     }
 
     @Override
-    public void delete() {
-        super.delete();
+    public void update() {
+        super.update();
     }
 
     @Override
-    public void get() {
-        super.get();
+    public void updateNotExisted() throws Exception {
+        super.updateNotExisted();
     }
 
     @Override
@@ -27,28 +32,33 @@ public class SortedArrayStorageTest extends AbstractArrayStorageTest {
     }
 
     @Override
-    public void getNotExist() throws Exception {
-        super.getNotExist();
-    }
-
-    @Override
     public void save() {
         super.save();
     }
 
     @Override
-    public void saveExisted() {
+    public void saveExisted() throws Exception {
         super.saveExisted();
     }
 
     @Override
-    public void size() {
-        super.size();
+    public void delete() {
+        super.delete();
     }
 
     @Override
-    public void update() {
-        super.update();
+    public void deleteNotExisted() throws Exception {
+        super.deleteNotExisted();
+    }
+
+    @Override
+    public void get() {
+        super.get();
+    }
+
+    @Override
+    public void getNotExisted() throws Exception {
+        super.getNotExisted();
     }
 
 }

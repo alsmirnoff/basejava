@@ -40,24 +40,28 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void size() {
-        System.out.println("size in abstract");
         Assert.assertEquals(3, storage.size());
     }
 
     @Test
     public void clear() {
-        System.out.println("clear in abstract");
         storage.clear();
         Assert.assertEquals(0, storage.size());
     }
 
     @Test
     public void update() {
+        storage.update(new Resume(UUID_1));
+        assertEquals(new Resume(UUID_1), storage.get(UUID_1));
+    }
+
+    @Test(expected = NotExistStorageException.class)
+    public void updateNotExisted() throws Exception {
+        storage.update(new Resume(UUID_4));
     }
 
     @Test
     public void getAll() {
-        System.out.println("get in abstract");
         Resume [] resumes = {new Resume(UUID_1), new Resume(UUID_2), new Resume(UUID_3)};
         Assert.assertArrayEquals(resumes, storage.getAll());
     }
@@ -77,23 +81,28 @@ public abstract class AbstractArrayStorageTest {
     }
 
     @Test(expected = ExistStorageException.class)
-    public void saveExisted() {
+    public void saveExisted() throws Exception {
         storage.save(new Resume(UUID_1));
     }
 
     @Test
     public void delete() {
+        storage.delete(UUID_1);
+        assertEquals(2, storage.size());
+    }
+
+    @Test(expected = NotExistStorageException.class)
+    public void deleteNotExisted() throws Exception {
+        storage.delete(UUID_4);
     }
 
     @Test
     public void get() {
-        System.out.println("get in abstract");
         Assert.assertEquals(new Resume(UUID_1), storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageException.class)
-    public void getNotExist() throws Exception {
-        System.out.println("getNotExist in abstract");
+    public void getNotExisted() throws Exception {
         storage.get("dummy");
     }
 }
