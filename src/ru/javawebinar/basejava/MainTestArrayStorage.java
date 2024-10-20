@@ -29,9 +29,9 @@ public class MainTestArrayStorage {
         System.out.println("---All---------------------------");
         printAll();
 
-        /*System.out.println("---Update-non-existed------------");
+        System.out.println("---Update-non-existed------------");
         ARRAY_STORAGE.update(r4);
-        printAll();*/
+        printAll();
 
         System.out.println("---Update-existed----------------");
         ARRAY_STORAGE.update(r2);
