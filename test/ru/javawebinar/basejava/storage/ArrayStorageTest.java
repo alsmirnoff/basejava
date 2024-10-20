@@ -52,13 +52,13 @@ public class ArrayStorageTest extends AbstractArrayStorageTest {
     }
 
     @Override
-    public void get() {
-        super.get();
+    public void getNotExisted() throws Exception {
+        super.getNotExisted();
     }
 
     @Override
-    public void getNotExisted() throws Exception {
-        super.getNotExisted();
+    public void get() {
+        super.get();
     }
 
 }
