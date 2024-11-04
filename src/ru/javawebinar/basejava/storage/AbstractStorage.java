@@ -26,31 +26,13 @@ public abstract class AbstractStorage implements Storage {
         }
     }
 
-    public void delete(String uuid) {
-        int index = indexOf(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        else {
-            doDelete(index);
-        }
-    }
-
-    public Resume get(String uuid) {
-        int index = indexOf(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        return doGet(index);
-    }
-
     protected abstract int indexOf(String uuid);
 
-    protected abstract void doDelete(int index);
+    //protected abstract void doDelete(int index);
 
     protected abstract void doUpdate(Resume resume, int index);
 
-    protected abstract Resume doGet(int index);
+    //protected abstract Resume doGet(int index);
 
     protected abstract void doSave(Resume resume, int index);
 

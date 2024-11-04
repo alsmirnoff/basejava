@@ -11,7 +11,7 @@ import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.exception.ExistStorageException;
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 
-public class ListStorageTest {
+public class MapStorageTest {
     private Storage storage;
 
     private static final String UUID_1 = "uuid1";
@@ -24,8 +24,8 @@ public class ListStorageTest {
     private static final Resume RESUME_3;
     private static final Resume RESUME_4;
 
-    public ListStorageTest() {
-        this.storage = new ListStorage();
+    public MapStorageTest() {
+        this.storage = new MapStorage();
     }
 
     static {
@@ -74,10 +74,14 @@ public class ListStorageTest {
     @Test
     public void getAll() throws Exception {
         Resume [] array = storage.getAll();
+        int count = 0;
         assertEquals(3, array.length);
-        assertEquals(RESUME_1, array[0]);
-        assertEquals(RESUME_2, array[1]);
-        assertEquals(RESUME_3, array[2]);
+        for (Resume resume : array) {
+            if(resume.equals(RESUME_1)) count++;
+            if(resume.equals(RESUME_2)) count++;
+            if(resume.equals(RESUME_3)) count++;
+        }
+        assertEquals(3, count);
     }
 
     @Test

@@ -1,33 +1,33 @@
 package ru.javawebinar.basejava.storage;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.model.Resume;
 
-public class ListStorage extends AbstractStorage {
+public class MapStorage extends AbstractStorage {
 
-    protected List<Resume> listStorage = new ArrayList<>();
+    protected Map<String, Resume> mapStorage = new HashMap<String, Resume>();    
 
     @Override
     public int size() {
-        return listStorage.size();
+       return mapStorage.entrySet().size();
     }
 
     @Override
     public void clear() {
-        listStorage.clear();
+        mapStorage.clear();
     }
 
     @Override
     public Resume[] getAll() {
-        return listStorage.toArray(new Resume[listStorage.size()]);
+        return mapStorage.values().toArray(new Resume[mapStorage.size()]);
     }
 
     @Override
     protected int indexOf(String uuid) {
-        return listStorage.indexOf(new Resume(uuid));
+        return mapStorage.containsKey(uuid) ? 1 : -1;
     }
 
     @Override
@@ -37,18 +37,18 @@ public class ListStorage extends AbstractStorage {
             throw new NotExistStorageException(uuid);
         }
         else {
-            listStorage.remove(index);
+            mapStorage.remove(uuid);
         }
     }
 
     /*@Override
     protected void doDelete(int index) {
-        listStorage.remove(index);
+        mapStorage.remove(Integer.toString(index));
     }*/
 
     @Override
     protected void doUpdate(Resume resume, int index) {
-        listStorage.set(index, resume);
+        mapStorage.put(resume.getUuid(), resume);
     }
 
     @Override
@@ -57,17 +57,17 @@ public class ListStorage extends AbstractStorage {
         if (index < 0) {
             throw new NotExistStorageException(uuid);
         }
-        return listStorage.get(index);
+        return mapStorage.get(uuid);
     }
 
     /*@Override
     protected Resume doGet(int index) {
-        return listStorage.get(index);
+        return mapStorage.get();
     }*/
 
     @Override
     protected void doSave(Resume resume, int index) {
-        listStorage.add(resume);
+        mapStorage.put(resume.getUuid(), resume);
     }
 
 }
