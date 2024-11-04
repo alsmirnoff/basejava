@@ -1,7 +1,5 @@
 package ru.javawebinar.basejava.storage;
 
-import ru.javawebinar.basejava.exception.ExistStorageException;
-import ru.javawebinar.basejava.exception.NotExistStorageException;
 import ru.javawebinar.basejava.exception.StorageException;
 import ru.javawebinar.basejava.model.Resume;
 
@@ -10,7 +8,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage implements Storage{
+public abstract class AbstractArrayStorage extends AbstractStorage{
     protected static final int STORAGE_LIMIT = 10000;
 
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -25,26 +23,16 @@ public abstract class AbstractArrayStorage implements Storage{
         size = 0;
     }
 
-    public void update(Resume resume) {
-        int index = indexOf(resume.getUuid());
-        if (index < 0) {
-            throw new NotExistStorageException(resume.getUuid());
-        }
-        else {
-            storage[index] = resume;
-        }
+    protected void doUpdate(Resume resume, int index) {
+        storage[index] = resume;
     }
 
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
-    public void save(Resume resume) {
-        int index = indexOf(resume.getUuid());
-        if (index >= 0) {
-            throw new ExistStorageException(resume.getUuid());
-        }
-        else if (size >= STORAGE_LIMIT) {
+    protected void doSave(Resume resume, int index) {
+        if (size >= STORAGE_LIMIT) {
             throw new StorageException("ERROR: storage overflow!", resume.getUuid());
         }
         else {
@@ -53,27 +41,15 @@ public abstract class AbstractArrayStorage implements Storage{
         }
     }
 
-    public void delete(String uuid) {
-        int index = indexOf(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
-        else {
-            fillDeletedElement(index);
-            storage[size - 1] = null;
-            size--;
-        }
+    protected void doDelete(int index) {
+        fillDeletedElement(index);
+        storage[size - 1] = null;
+        size--;
     }
 
-    public Resume get(String uuid) {
-        int index = indexOf(uuid);
-        if (index < 0) {
-            throw new NotExistStorageException(uuid);
-        }
+    protected Resume doGet(int index) {
         return storage[index];
     }
-
-    protected abstract int indexOf(String uuid);
 
     protected abstract void insertElement(Resume resume, int index);
 

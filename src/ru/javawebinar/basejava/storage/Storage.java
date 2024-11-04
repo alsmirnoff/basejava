@@ -7,17 +7,18 @@ import ru.javawebinar.basejava.model.Resume;
  */
 public interface Storage {
 
+    int size();
+
     void clear();
 
     void update(Resume resume);
 
-    void save(Resume resume);
-
     Resume get(String uuid);
-
-    void delete(String uuid);
 
     Resume[] getAll();
 
-    int size();
+    void save(Resume resume);
+
+    void delete(String uuid);
+
 }
