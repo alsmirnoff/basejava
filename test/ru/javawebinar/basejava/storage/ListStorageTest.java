@@ -1,18 +1,12 @@
 package ru.javawebinar.basejava.storage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+public class ListStorageTest extends AbstractStorageTest{
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+    public ListStorageTest() {
+        super(new ListStorage());
+    }
 
-import ru.javawebinar.basejava.model.Resume;
-import ru.javawebinar.basejava.exception.ExistStorageException;
-import ru.javawebinar.basejava.exception.NotExistStorageException;
-
-public class ListStorageTest {
-    private Storage storage;
+    /*private Storage storage;
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -122,6 +116,6 @@ public class ListStorageTest {
 
     private void assertSize(int size) {
         assertEquals(size, storage.size());
-    }
+    }*/
 
 }
