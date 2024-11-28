@@ -1,5 +1,7 @@
 package ru.javawebinar.basejava.storage;
 
+import java.util.List;
+
 import ru.javawebinar.basejava.model.Resume;
 
 /**
@@ -15,7 +17,10 @@ public interface Storage {
 
     Resume get(String uuid);
 
-    Resume[] getAll();
+    //Resume[] getAll();
+    
+    //return list sorted by name 
+    List<Resume> getAllSorted();
 
     void save(Resume resume);
 

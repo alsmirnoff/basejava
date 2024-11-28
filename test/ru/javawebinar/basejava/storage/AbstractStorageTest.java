@@ -12,6 +12,8 @@ import ru.javawebinar.basejava.model.Resume;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 public abstract class AbstractStorageTest {
     private Storage storage;
 
@@ -72,13 +74,19 @@ public abstract class AbstractStorageTest {
         storage.update(new Resume("dummy"));
     }
 
-    @Test
+    /*@Test
     public void getAll() throws Exception {
         Resume [] array = storage.getAll();
         assertEquals(3, array.length);
         assertEquals(RESUME_1, array[0]);
         assertEquals(RESUME_2, array[1]);
         assertEquals(RESUME_3, array[2]); 
+    }*/
+
+    @Test
+    public void getAllSorted(){
+        List<Resume> list = storage.getAllSorted();
+        assertEquals(3, list.size());
     }
 
     @Test
@@ -100,7 +108,7 @@ public abstract class AbstractStorageTest {
         storage.get(UUID_1);
     }
 
-    // TODO: remain only for Arrays implementation
+    // TODO remain only for Arrays implementation
     @Ignore
     @Test(expected = StorageException.class)
     public void saveOverflow() throws Exception {

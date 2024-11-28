@@ -5,57 +5,65 @@ import java.util.HashMap;
 
 import ru.javawebinar.basejava.model.Resume;
 
-public class MapStorage extends AbstractStorage {
 
-    private Map<String, Resume> mapStorage = new HashMap<String, Resume>();
+// TODO implement
+// TODO create new MapStorage with search key not uuid
+public class MapUuidStorage extends AbstractStorage {
+
+    private Map<String, Resume> mapStorage = new HashMap<>();
     
     @Override
     protected Object getSearchKey(String uuid) {
-        for (Map.Entry<String, Resume> entry : mapStorage.entrySet()) {
+        /*for (Map.Entry<String, Resume> entry : mapStorage.entrySet()) {
             if(uuid.equals(entry.getKey())) return entry.getKey();
         }
-        return null;
+        return null;*/
+        return uuid;
     }
 
     @Override
     protected boolean isExist(Object searchKey) {
-        return searchKey != null;
+        //return searchKey != null;
+        return false;
     }
 
     @Override
     protected void doUpdate(Resume resume, Object searchKey) {
-        mapStorage.put((String) searchKey, resume);
+        //mapStorage.put((String) searchKey, resume);
     }
 
     @Override
     protected void doSave(Resume resume, Object searchKey) {
-        System.out.println(" === (String) searchKey: " + (String) searchKey);
-        mapStorage.put((String) searchKey, resume);
+        /*System.out.println(" === (String) searchKey: " + (String) searchKey);
+        mapStorage.put((String) searchKey, resume);*/
     }
 
     @Override
     protected Resume doGet(Object searchKey) {
-        return mapStorage.get((String) searchKey);
+        //return mapStorage.get((String) searchKey);
+        return null;
     }
 
     @Override
     protected void doDelete(Object searchKey) {
-        mapStorage.remove(searchKey);
+        //mapStorage.remove(searchKey);
     }
 
     @Override
     public void clear() {
-        mapStorage.clear();
+        //mapStorage.clear();
     }
 
     @Override
     public int size() {
-        return mapStorage.size();
+        //return mapStorage.size();
+        return 0;
     }
 
     @Override
     public Resume[] getAll() {
-        return mapStorage.entrySet().toArray(new Resume[mapStorage.size()]);
+        //return mapStorage.entrySet().toArray(new Resume[mapStorage.size()]);
+        return null;
     }
 
     /*protected Map<String, Resume> mapStorage = new HashMap<String, Resume>();    
