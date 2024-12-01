@@ -53,9 +53,9 @@ public class MainTestMapStorage {
     }
 
     static void printAll() {
-        System.out.println("\nGet All");
+        /*System.out.println("\nGet All");
         for (Resume r : MAP_STORAGE.getAll()) {
             System.out.println(r);
-        }
+        }*/
     }
 }

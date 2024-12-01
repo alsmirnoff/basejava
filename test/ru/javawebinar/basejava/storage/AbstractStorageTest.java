@@ -22,6 +22,11 @@ public abstract class AbstractStorageTest {
     private static final String UUID_3 = "uuid3";
     private static final String UUID_4 = "uuid4";
 
+    private static final String NAME_1 = "name1";
+    private static final String NAME_2 = "name2";
+    private static final String NAME_3 = "name3";
+    private static final String NAME_4 = "name4";
+
     private static final Resume RESUME_1;
     private static final Resume RESUME_2;
     private static final Resume RESUME_3;
@@ -33,17 +38,21 @@ public abstract class AbstractStorageTest {
 
     static {
         RESUME_1 = new Resume(UUID_1);
+        RESUME_1.setFullName(NAME_1);
         RESUME_2 = new Resume(UUID_2);
+        RESUME_2.setFullName(NAME_2);
         RESUME_3 = new Resume(UUID_3);
+        RESUME_3.setFullName(NAME_3);
         RESUME_4 = new Resume(UUID_4);
+        RESUME_4.setFullName(NAME_4);
     }
     
     @Before
     public void setUp() throws Exception {
         storage.clear();
         storage.save(RESUME_1);
-        storage.save(RESUME_2);
         storage.save(RESUME_3);
+        storage.save(RESUME_2);
     }
 
     @After
@@ -87,6 +96,9 @@ public abstract class AbstractStorageTest {
     public void getAllSorted(){
         List<Resume> list = storage.getAllSorted();
         assertEquals(3, list.size());
+        assertEquals(RESUME_1, list.get(0));
+        assertEquals(RESUME_2, list.get(1));
+        assertEquals(RESUME_3, list.get(2)); 
     }
 
     @Test
