@@ -1,6 +1,6 @@
 package ru.javawebinar.basejava.storage;
 
-import java.util.Comparator;
+//import java.util.Comparator;
 import java.util.List;
 
 import ru.javawebinar.basejava.model.Resume;
@@ -10,7 +10,7 @@ import ru.javawebinar.basejava.model.Resume;
  */
 public interface Storage {
 
-    Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing((Resume r) -> r.getFullName()).thenComparing(r -> r.getUuid());
+    //Comparator<Resume> RESUME_COMPARATOR = Comparator.comparing((Resume r) -> r.getFullName()).thenComparing(r -> r.getUuid());
 
     int size();
 

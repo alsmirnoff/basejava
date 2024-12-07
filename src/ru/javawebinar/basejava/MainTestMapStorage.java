@@ -4,16 +4,16 @@ import ru.javawebinar.basejava.model.Resume;
 import ru.javawebinar.basejava.storage.MapUuidStorage;
 
 /**
- * Test for your com.urise.webapp.storage.ArrayStorage implementation
+ * Test for your com.urise.webapp.storage.MapUuidStorage implementation
  */
 public class MainTestMapStorage {
     private static final MapUuidStorage MAP_STORAGE = new MapUuidStorage();
 
     public static void main(String[] args) {
-        final Resume r1 = new Resume("uuid1");
-        final Resume r2 = new Resume("uuid2");
-        final Resume r3 = new Resume("uuid3");
-        final Resume r4 = new Resume("uuid4");
+        final Resume r1 = new Resume(null, null);
+        final Resume r2 = new Resume(null, null);
+        final Resume r3 = new Resume(null, null);
+        final Resume r4 = new Resume(null, null);
 
         MAP_STORAGE.save(r1);
         MAP_STORAGE.save(r2);
