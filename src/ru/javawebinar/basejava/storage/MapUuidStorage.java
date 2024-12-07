@@ -1,45 +1,43 @@
 package ru.javawebinar.basejava.storage;
 
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
 import ru.javawebinar.basejava.model.Resume;
 
 
-public class MapUuidStorage extends AbstractStorage {
+public class MapUuidStorage extends AbstractStorage<String> {
 
     private Map<String, Resume> mapStorage = new HashMap<>();
 
     @Override
-    protected Object getSearchKey(String uuid) { return uuid; }
+    protected String getSearchKey(String uuid) { return uuid; }
 
     @Override
-    protected boolean isExist(Object uuid) {
-        return mapStorage.containsKey((String) uuid);
+    protected boolean isExist(String uuid) {
+        return mapStorage.containsKey(uuid);
     }
 
     @Override
-    protected void doUpdate(Resume resume, Object uuid) {
-        mapStorage.put((String) uuid, resume);
+    protected void doUpdate(Resume resume, String uuid) {
+        mapStorage.put(uuid, resume);
     }
 
     @Override
-    protected void doSave(Resume resume, Object uuid) {
-        mapStorage.put((String) uuid, resume);
+    protected void doSave(Resume resume, String uuid) {
+        mapStorage.put(uuid, resume);
     }
 
     @Override
-    protected Resume doGet(Object uuid) {
-        return mapStorage.get((String) uuid);
+    protected Resume doGet(String uuid) {
+        return mapStorage.get(uuid);
     }
 
     @Override
-    protected void doDelete(Object uuid) {
-        mapStorage.remove((String) uuid);
+    protected void doDelete(String uuid) {
+        mapStorage.remove(uuid);
     }
 
     @Override

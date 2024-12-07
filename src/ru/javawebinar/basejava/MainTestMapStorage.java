@@ -31,9 +31,9 @@ public class MainTestMapStorage {
         System.out.println("---All---------------------------");
         printAll();
 
-        /*System.out.println("---Update-non-existed------------");
+        System.out.println("---Update-non-existed------------");
         MAP_STORAGE.update(r4);
-        printAll();*/
+        printAll();
 
         System.out.println("---Update-existed----------------");
         MAP_STORAGE.update(r2);
@@ -53,9 +53,9 @@ public class MainTestMapStorage {
     }
 
     static void printAll() {
-        /*System.out.println("\nGet All");
-        for (Resume r : MAP_STORAGE.getAll()) {
+        System.out.println("\nGet All");
+        for (Resume r : MAP_STORAGE.getAllSorted()) {
             System.out.println(r);
-        }*/
+        }
     }
 }

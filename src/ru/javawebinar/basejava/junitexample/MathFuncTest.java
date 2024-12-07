@@ -25,6 +25,7 @@ public class MathFuncTest {
     //public TestRule timeout = new Timeout(100);
     public Timeout globalTimeout = Timeout.millis(1000);
 
+    @SuppressWarnings("rawtypes")
     @Parameterized.Parameters
     public static Collection number() {
         return Arrays.asList(new Object[][]{{1,2,3}, {2,9,11}, {3,3,6}});

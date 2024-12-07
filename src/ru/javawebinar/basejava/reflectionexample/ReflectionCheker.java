@@ -1,7 +1,6 @@
 package ru.javawebinar.basejava.reflectionexample;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -10,6 +9,7 @@ import java.lang.reflect.Type;
 
 public class ReflectionCheker {
     public void showClassName(Object object) throws NoSuchMethodException, SecurityException {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         System.out.println(clazz.getName());
         /*for (Constructor constr : clazz.getConstructors()) {
@@ -52,6 +52,7 @@ public class ReflectionCheker {
       }*/
 
     public void showClassFields(Object object) {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Field [] fields = clazz.getDeclaredFields();
         for(Field field : fields) {
@@ -60,6 +61,7 @@ public class ReflectionCheker {
     }
 
     public void showClassMethods(Object object) {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Method [] methods = clazz.getMethods();
         for(Method method : methods) {
@@ -68,6 +70,7 @@ public class ReflectionCheker {
     }
 
     public void showFieldsAnnotations(Object object) {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Field [] fields = clazz.getDeclaredFields();
         for(Field field : fields) {
@@ -79,6 +82,7 @@ public class ReflectionCheker {
     }
 
     public void showClassAnnotations(Object object) {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Annotation [] annotations = clazz.getAnnotations();
         for (Annotation annotation : annotations) {
@@ -92,6 +96,7 @@ public class ReflectionCheker {
     }
 
     public void fillPrivateFields(Object object) throws IllegalAccessException {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Field [] fields = clazz.getDeclaredFields();
         for(Field field : fields) {
@@ -107,11 +112,13 @@ public class ReflectionCheker {
     }
 
     public Object createNewObject(Object object) throws InstantiationException, IllegalAccessException {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         return clazz.newInstance();
     }
 
     public void getGenericsMethodType(Object object) throws NoSuchMethodException, SecurityException{
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Method method = clazz.getMethod("getList", null);
 
@@ -122,6 +129,7 @@ public class ReflectionCheker {
             ParameterizedType type = (ParameterizedType) returnType;
             Type[] typeArguments = type.getActualTypeArguments();
             for (Type typeArgument : typeArguments) {
+                @SuppressWarnings("rawtypes")
                 Class typeClass = (Class) typeArgument;
                 System.out.println("Type: " + typeClass);
             }
@@ -129,6 +137,7 @@ public class ReflectionCheker {
     }
 
     public void getGenericFieldType(Object object) throws NoSuchFieldException, SecurityException {
+        @SuppressWarnings("rawtypes")
         Class clazz = object.getClass();
         Field field = clazz.getDeclaredField("simpleList");
 
@@ -139,6 +148,7 @@ public class ReflectionCheker {
             ParameterizedType pType = (ParameterizedType) genericFieldType;
             Type[] fieldArgTypes = pType.getActualTypeArguments();
             for (Type fieldArgType : fieldArgTypes){
+                @SuppressWarnings("rawtypes")
                 Class fieldClass = (Class) fieldArgType;
                 System.out.println("Type: " + fieldClass);
             }

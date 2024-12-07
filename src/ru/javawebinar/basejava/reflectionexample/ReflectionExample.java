@@ -12,7 +12,7 @@ public class ReflectionExample {
 
         //cheker.showClassFields(simpleClass);
 
-        //cheker.showClassName(rabbit);
+        cheker.showClassName(rabbit);
         //cheker.showClassFields(rabbit);
         //cheker.showClassMethods(cheker);
 

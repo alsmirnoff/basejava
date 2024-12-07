@@ -8,7 +8,7 @@ import java.util.Comparator;
 /**
  * Sorted array based storage for Resumes
  */
-public class SortedArrayStorage extends AbstractArrayStorage{
+public class SortedArrayStorage extends AbstractArrayStorage {
 
     // private static class ResumeComparator implements Comparator<Resume> {
     //     @Override

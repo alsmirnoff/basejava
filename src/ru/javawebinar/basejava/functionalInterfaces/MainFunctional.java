@@ -28,5 +28,6 @@ public class MainFunctional {
 
         Gen gen6 = new Gen();
         IntElementGenerator ieg = gen6::nextElement;
+        System.out.println(ieg);
     }
 }
