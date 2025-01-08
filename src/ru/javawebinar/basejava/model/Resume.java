@@ -1,5 +1,6 @@
 package ru.javawebinar.basejava.model;
 
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -12,6 +13,9 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
 
     private final String fullName;
+
+    private Map<ContactType, String> contacts;
+    private Map<SectionType, Section> sections;
 
     public String getFullName() {
         return fullName;
@@ -34,6 +38,22 @@ public class Resume implements Comparable<Resume> {
 
     public String getUuid() {
         return uuid;
+    }
+
+    public void setContacts(Map<ContactType, String> contacts){
+        this.contacts = contacts;
+    }
+
+    public Map<ContactType, String> getContacts(){
+        return contacts;
+    }
+
+    public void setSections(Map<SectionType, Section> sections){
+        this.sections = sections;
+    }
+
+    public Map<SectionType, Section> getSections(){
+        return sections;
     }
 
     @Override
