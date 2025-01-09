@@ -2,6 +2,7 @@ package ru.javawebinar.basejava;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,17 +55,17 @@ public class ResumeTestData {
 
         Resume resume = new Resume("Григорий Кислин");
 
-        Map<ContactType, String> contacts = new HashMap<>();
+        Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
         contacts.put(ContactType.PHONE, "+7(921) 855-0482");
         contacts.put(ContactType.EMAIL, "gkislin@yandex.ru");
         contacts.put(ContactType.SKYPE, "skype:grigory.kislin");
         contacts.put(ContactType.LINKEDIN, "https://www.linkedin.com/in/gkislin");
         contacts.put(ContactType.GITHUB, "https://github.com/gkislin");
         contacts.put(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473");
-        contacts.put(ContactType.HOMEPAGE, "http://gkislin.ru/");
+        contacts.put(ContactType.HOME_PAGE, "http://gkislin.ru/");
 
         
-        Map<SectionType, Section> sections = new HashMap<>();
+        Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
         sections.put(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
         sections.put(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям."));
         
