@@ -18,7 +18,7 @@ public class MainDate {
 
         Calendar cal = Calendar.getInstance();
         cal.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-        System.out.println("Calendar: " + cal.getTime());
+        System.out.println("Calendar: " + cal.getTime()); // wrong. same date in default time zone
 
         LocalDate ld = LocalDate.now();
         LocalTime lt = LocalTime.now();
@@ -31,5 +31,6 @@ public class MainDate {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YY/MM/dd");
         System.out.println("DateTimeFormatter: " + dtf.format(ldt));
+
     }
 }
