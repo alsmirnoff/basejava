@@ -1,8 +1,10 @@
 package ru.javawebinar.basejava;
 
 import java.io.File;
+import java.util.Date;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 
 public class MainFile {
     public static void main(String[] args) {
@@ -24,27 +26,35 @@ public class MainFile {
             }
         }
 
-        /*FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(filePath);
-            System.out.println(fis.read());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            if(fis != null){
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
-
         try (FileInputStream fis = new FileInputStream(filePath);) {
             System.out.println(fis.read());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+        File pathFile = new File("src/ru/javawebinar/basejava");        
+        try {
+            System.out.println("=========================================");
+            System.out.println("All files and directories in: " + pathFile.getCanonicalPath());
+            viewFiles(pathFile, System.out);
+        } catch (IOException e) {
+            throw new RuntimeException("Error", e);
+        }
+
+    }
+
+    public static void viewFiles(File file, PrintStream output) throws IOException {
+            if(file.isDirectory() && !file.isHidden()){
+                output.println("d " + file.getName());
+                File[] list = file.listFiles();
+                for (int i = 0; i < list.length; i++) {
+                    viewFiles(list[i], output);
+                }
+            }
+            else {
+                if(!file.isHidden()) {
+                    output.println("\t |- " + file.length() + " b\t" + new Date(file.lastModified()) + "\t" + file.getName());
+                }
+            }
     }
 }
