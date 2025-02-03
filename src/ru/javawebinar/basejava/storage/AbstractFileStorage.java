@@ -2,6 +2,7 @@ package ru.javawebinar.basejava.storage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,14 +26,15 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        return directory.list().length;
     }
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        File[] list = directory.listFiles();
+        for (File file : list) {
+            file.delete();
+        }
     }
 
     @Override
@@ -47,8 +49,11 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     protected void doUpdate(Resume resume, File file) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'doUpdate'");
+        try {
+            doWrite(resume, file);
+        } catch (IOException e) {
+            throw new StorageException("IO error", file.getName(), e);
+        }
     }
 
     @Override
@@ -60,25 +65,29 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
             throw new StorageException("IO error", file.getName(), e);
         }
     }
-            
-    protected abstract void doWrite(Resume resume, File file) throws IOException;
-            
+     
     @Override
     protected void doDelete(File file) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'doDelete'");
+        file.delete();
     }
 
     @Override
     protected Resume doGet(File file) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'doGet'");
+        return doRead(file);
     }
 
     @Override
     protected List<Resume> doCopyAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'doCopyAll'");
+        List<Resume> resumes = new ArrayList<>();
+        File[] list = directory.listFiles();
+        for (File file : list) {
+            resumes.add(doRead(file));
+        }
+        return resumes;
     }
+
+    protected abstract void doWrite(Resume resume, File file) throws IOException;
+
+    protected abstract Resume doRead(File file);
 
 }

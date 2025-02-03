@@ -3,6 +3,7 @@ package ru.javawebinar.basejava;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import ru.javawebinar.basejava.model.ContactType;
 import ru.javawebinar.basejava.model.ListSection;
@@ -14,47 +15,8 @@ import ru.javawebinar.basejava.model.TextSection;
 
 public class ResumeTestData {
 
-    /*private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid2";
-    private static final String UUID_3 = "uuid3";
-    private static final String UUID_4 = "uuid4";
-
-    private static final String NAME_1 = "name1";
-    private static final String NAME_2 = "name2";
-    private static final String NAME_3 = "name3";
-    private static final String NAME_4 = "name4";
-
-    private static final Resume RESUME_1;
-    private static final Resume RESUME_2;
-    private static final Resume RESUME_3;
-    private static final Resume RESUME_4;
-
-    static {
-        RESUME_1 = new Resume(UUID_1, NAME_1);
-        RESUME_2 = new Resume(UUID_2, NAME_2);
-        RESUME_3 = new Resume(UUID_3, NAME_3);
-        RESUME_4 = new Resume(UUID_4, NAME_4);
-    }
-
-    public Resume getResume(int i){
-        switch (i) {
-            case 1: return RESUME_1;
-            case 2: return RESUME_2;
-            case 3: return RESUME_3;
-            case 4: return RESUME_4;
-            default: return new Resume(null,null);}
-    }*/
-
     public Resume createResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
-        //resume.setContact(null, fullName);
-        //resume.setSection(null, null);
-        return resume;
-    }
-
-    public static void main(String[] args) {
-
-        Resume resume = new Resume("Григорий Кислин");
 
         resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
         resume.setContact(ContactType.EMAIL, "gkislin@yandex.ru");
@@ -63,10 +25,10 @@ public class ResumeTestData {
         resume.setContact(ContactType.GITHUB, "https://github.com/gkislin");
         resume.setContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473");
         resume.setContact(ContactType.HOME_PAGE, "http://gkislin.ru/");
-        
+
         resume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
         resume.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям."));
-        
+
         List<String> achievments = new ArrayList<>();
         achievments.add("Организация команды и успешная реализация Java проектов для сторонних заказчиков: приложения автопарк на стеке Spring Cloud/микросервисы, система мониторинга показателей спортсменов на Spring Boot, участие в проекте МЭШ на Play-2, многомодульный Spring Boot + Vaadin проект для комплексных DIY смет");
         achievments.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. Более 3500 выпускников. ");
@@ -77,7 +39,7 @@ public class ResumeTestData {
         qualifications.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
         qualifications.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, SQLite, MS SQL, HSQLDB");
         resume.setSection(SectionType.QUALIFICATIONS, new ListSection(qualifications));
-        
+
         Organization expOrganization1 = new Organization(
             "Alcatel", 
             "http://www.alcatel.ru/", 
@@ -119,16 +81,17 @@ public class ResumeTestData {
         List<Organization> edOrganizations = new ArrayList<>();
         edOrganizations.add(edOrg1);
         edOrganizations.add(edOrg2);
-        //edOrganizations.add(edOrg3);
         resume.setSection(SectionType.EDUCATION, new OrganizationSection(edOrganizations));
+
+        return resume;
+    }
+
+    public static void main(String[] args) {
+
+        Resume resume = new ResumeTestData().createResume(UUID.randomUUID().toString(), "Григорий Кислин");
 
         //имя
         System.out.println(resume.getFullName());
-
-        //контакты
-        /*for (Map.Entry<ContactType, String> contact : resume.getContacts().entrySet()) {
-            System.out.println(contact.getKey().getType() + ": " + contact.getValue());
-        }*/
 
         System.out.println(ContactType.PHONE.getType() + ": " + resume.getContact(ContactType.PHONE));
         System.out.println(ContactType.EMAIL.getType() + ": " + resume.getContact(ContactType.EMAIL));
