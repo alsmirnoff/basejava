@@ -11,18 +11,12 @@ public class TextSection extends Section {
         this.content = content;
     }
 
-    public String getContent() { 
-        return content; 
-    }
+    public String getContent() { return content; }
 
-    public String toString() { 
-        return content; 
-    }
+    public String toString() { return content; }
 
     @Override
-    public int hashCode() {
-        return content.hashCode();
-    }
+    public int hashCode() { return content.hashCode(); }
 
     @Override
     public boolean equals(Object obj) {

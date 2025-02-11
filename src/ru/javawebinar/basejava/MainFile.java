@@ -36,25 +36,25 @@ public class MainFile {
         try {
             System.out.println("=========================================");
             System.out.println("All files and directories in: " + pathFile.getCanonicalPath());
-            viewFiles(pathFile, System.out);
+            viewFiles(pathFile);
         } catch (IOException e) {
             throw new RuntimeException("Error", e);
         }
 
     }
 
-    public static void viewFiles(File file, PrintStream output) throws IOException {
-            if(file.isDirectory() && !file.isHidden()){
-                output.println("d " + file.getName());
-                File[] list = file.listFiles();
-                for (int i = 0; i < list.length; i++) {
-                    viewFiles(list[i], output);
-                }
+    public static void viewFiles(File file) throws IOException {
+        if(file.isDirectory() && !file.isHidden()){
+            System.out.println("d " + file.getName());
+            File[] list = file.listFiles();
+            for (int i = 0; i < list.length; i++) {
+                viewFiles(list[i]);
             }
-            else {
-                if(!file.isHidden()) {
-                    output.println("\t |- " + file.length() + " b\t" + new Date(file.lastModified()) + "\t" + file.getName());
-                }
+        }
+        else {
+            if(!file.isHidden()) {
+                System.out.println("\t |- " + file.length() + " b\t" + new Date(file.lastModified()) + "\t" + file.getName());
             }
+        }
     }
 }

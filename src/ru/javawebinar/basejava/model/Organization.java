@@ -1,61 +1,101 @@
 package ru.javawebinar.basejava.model;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+
+import static ru.javawebinar.basejava.util.DateUtil.NOW;
+import ru.javawebinar.basejava.util.DateUtil;
 
 public class Organization {
 
     private final Link homePage;
 
-    private final Collection<Period> periods = new ArrayList<>();
+    private List<Position> positions = new ArrayList<>();
 
-    public Organization(String name, String url, LocalDate startDate, LocalDate endDate, String title, String description){
-        Objects.requireNonNull(startDate, "startDate must not be null");
-        Objects.requireNonNull(endDate, "endDate must not be null");
-        Objects.requireNonNull(title, "title must not be null");
-        this.homePage = new Link(name, url);
-        periods.add(new Period(startDate, endDate, title, description));
-        //this.period.add(Period.between(startDate, endDate));
+    public Organization(String name, String url, Position... positions){
+        this(new Link(name, url), Arrays.asList(positions));
     }
 
-    public void setPeriod(LocalDate startDate, LocalDate endDate, String title, String description) {
-        periods.add(new Period(startDate, endDate, title, description));
-    }
-
-    public Collection<Period> getPeriods() {
-        return this.periods;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Organization {" +
-                "homePage=" + homePage + 
-                ", periods=" + periods + 
-                "}";
+    public Organization(Link homePage, List<Position> positions){
+        this.homePage = homePage;
+        this.positions = positions;
     }
 
     @Override
-    public int hashCode() {
-        int result = homePage.hashCode();
-        result = 31 * result + periods.hashCode();
-        return result;
-    }
+    public String toString() { return "Organization (" + homePage + ", " + positions + ")"; }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Organization other = (Organization) obj;
-        if (homePage == null) { 
-            if (other.homePage != null) return false;
-        } else if (!homePage.equals(other.homePage)) return false;
-        if (periods == null) {
-            if (other.periods != null) return false;
-        } else if (!periods.equals(other.periods)) return false;
-        return true;
-    }
+    public int hashCode() { return Objects.hash(homePage, positions); }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Organization other = (Organization) o;
+        return Objects.equals(homePage, other.homePage) && 
+                Objects.equals(positions, other.positions);
+    }
+    
+    public static class Position {
+
+        private final LocalDate startDate;
+
+        private final LocalDate endDate;
+
+        private final String title;
+        
+        private final String description;
+
+        public Position(int startYear, Month startMonth, String title, String description){
+            this(DateUtil.of(startYear, startMonth), NOW, title, description);
+        }
+
+        public Position(int startYear, Month startMonth, int endYear, Month endMonth, String title, String description){
+            this(DateUtil.of(startYear, startMonth), DateUtil.of(endYear, endMonth), title, description);
+        }
+
+        public Position(LocalDate startDate, LocalDate endDate, String title, String description) {
+            Objects.requireNonNull(startDate, "startDate must not be null");
+            Objects.requireNonNull(endDate, "endDate must not be null");
+            Objects.requireNonNull(title, "title must not be null");
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.title = title;
+            this.description = description;
+        }
+
+        public LocalDate getStartDate() { return startDate; }
+
+        public LocalDate getEndDate() { return endDate; }
+
+        public String getTitle() { return title; }
+
+        public String getDescription() { return description; }
+        
+        @Override
+        public String toString() {
+            return "Position (" + startDate + ", " + endDate + ", " + title + ", " + description + ")";
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(startDate, endDate, title, description);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Position position = (Position) o;
+            return Objects.equals(startDate, position.startDate) && 
+                    Objects.equals(endDate, position.endDate) &&
+                    Objects.equals(title, position.title) &&
+                    Objects.equals(description, position.description);
+        }
+
+    }
 }

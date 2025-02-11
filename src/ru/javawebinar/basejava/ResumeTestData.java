@@ -1,8 +1,6 @@
 package ru.javawebinar.basejava;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Month;
 import java.util.UUID;
 
 import ru.javawebinar.basejava.model.ContactType;
@@ -18,29 +16,31 @@ public class ResumeTestData {
     public Resume createResume(String uuid, String fullName) {
         Resume resume = new Resume(uuid, fullName);
 
-        resume.setContact(ContactType.PHONE, "+7(921) 855-0482");
-        resume.setContact(ContactType.EMAIL, "gkislin@yandex.ru");
-        resume.setContact(ContactType.SKYPE, "skype:grigory.kislin");
-        resume.setContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/gkislin");
-        resume.setContact(ContactType.GITHUB, "https://github.com/gkislin");
-        resume.setContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473");
-        resume.setContact(ContactType.HOME_PAGE, "http://gkislin.ru/");
+        resume.addContact(ContactType.PHONE, "11111");
+        resume.addContact(ContactType.EMAIL, "mail1@ya.ru");
+        /*resume.addContact(ContactType.SKYPE, "skype:grigory.kislin");
+        resume.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/gkislin");
+        resume.addContact(ContactType.GITHUB, "https://github.com/gkislin");
+        resume.addContact(ContactType.STACKOVERFLOW, "https://stackoverflow.com/users/548473");
+        resume.addContact(ContactType.HOME_PAGE, "http://gkislin.ru/");*/
 
-        resume.setSection(SectionType.PERSONAL, new TextSection("Аналитический склад ума, сильная логика, креативность, инициативность. Пурист кода и архитектуры."));
-        resume.setSection(SectionType.OBJECTIVE, new TextSection("Ведущий стажировок и корпоративного обучения по Java Web и Enterprise технологиям."));
+        resume.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
+        resume.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
 
-        List<String> achievments = new ArrayList<>();
+        /*List<String> achievments = new ArrayList<>();
         achievments.add("Организация команды и успешная реализация Java проектов для сторонних заказчиков: приложения автопарк на стеке Spring Cloud/микросервисы, система мониторинга показателей спортсменов на Spring Boot, участие в проекте МЭШ на Play-2, многомодульный Spring Boot + Vaadin проект для комплексных DIY смет");
         achievments.add("С 2013 года: разработка проектов \"Разработка Web приложения\",\"Java Enterprise\", \"Многомодульный maven. Многопоточность. XML (JAXB/StAX). Веб сервисы (JAX-RS/SOAP). Удаленное взаимодействие (JMS/AKKA)\". Организация онлайн стажировок и ведение проектов. Более 3500 выпускников. ");
-        resume.setSection(SectionType.ACHIEVEMENTS, new ListSection(achievments));
+        */
+        resume.addSection(SectionType.ACHIEVEMENTS, new ListSection("Achivment11", "Achivment12", "Achivment13"));
 
-        List<String> qualifications = new ArrayList<>();
+        /*List<String> qualifications = new ArrayList<>();
         qualifications.add("JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2");
         qualifications.add("Version control: Subversion, Git, Mercury, ClearCase, Perforce");
         qualifications.add("DB: PostgreSQL(наследование, pgplsql, PL/Python), Redis (Jedis), H2, Oracle, MySQL, SQLite, MS SQL, HSQLDB");
-        resume.setSection(SectionType.QUALIFICATIONS, new ListSection(qualifications));
+        */
+        resume.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "SQL", "JavaScript"));
 
-        Organization expOrganization1 = new Organization(
+        /*Organization expOrganization1 = new Organization(
             "Alcatel", 
             "http://www.alcatel.ru/", 
             LocalDate.of(1997,9,1), 
@@ -57,9 +57,16 @@ public class ResumeTestData {
         List<Organization> expOrganizations = new ArrayList<>();
         expOrganizations.add(expOrganization1);
         expOrganizations.add(expOrganization2);
-        resume.setSection(SectionType.EXPERIENCE, new OrganizationSection(expOrganizations));
+        */
 
-        Organization edOrg1 = new Organization(
+        resume.addSection(SectionType.EXPERIENCE, 
+            new OrganizationSection(
+                new Organization("Organization11", "http://Organization11.ru",
+                    new Organization.Position(2005, Month.JANUARY, "position1", "content1"),
+                    new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "position2", "content2")
+        )));
+
+        /*Organization edOrg1 = new Organization(
             "Заочная физико-техническая школа при МФТИ", 
             "https://mipt.ru/", 
             LocalDate.of(1984,9,1), 
@@ -80,8 +87,15 @@ public class ResumeTestData {
             "");
         List<Organization> edOrganizations = new ArrayList<>();
         edOrganizations.add(edOrg1);
-        edOrganizations.add(edOrg2);
-        resume.setSection(SectionType.EDUCATION, new OrganizationSection(edOrganizations));
+        edOrganizations.add(edOrg2);*/
+
+        resume.addSection(SectionType.EDUCATION, 
+            new OrganizationSection(
+                new Organization("Institute", null,
+                    new Organization.Position(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", null),
+                    new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
+                new Organization("Organization12", "http://Organization12.ru"))
+        );
 
         return resume;
     }
