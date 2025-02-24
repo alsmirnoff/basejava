@@ -19,7 +19,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     private File directory;
 
-    private AbstractFileStorage(File directory){
+    protected AbstractFileStorage(File directory){
         Objects.requireNonNull(directory, "directory must not be null");
         if(!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + " is not a directory");
@@ -107,8 +107,8 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
         return resumes;
     }
 
-    protected abstract void doWrite(Resume resume, OutputStream file) throws IOException;
+    protected abstract void doWrite(Resume resume, OutputStream os) throws IOException;
 
-    protected abstract Resume doRead(InputStream file) throws IOException;
+    protected abstract Resume doRead(InputStream is) throws IOException;
 
 }

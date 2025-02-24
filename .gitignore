@@ -3,6 +3,7 @@ out
 *.iml
 log
 bin
+src/ru/javawebinar/basejava/fileStorage
 
 
 .vscode
