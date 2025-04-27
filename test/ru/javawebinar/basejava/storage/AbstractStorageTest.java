@@ -55,10 +55,10 @@ public abstract class AbstractStorageTest {
         storage.save(R2);
     }
 
-    @After
+    /*@After
     public void tearDown() {
         storage.clear();
-    }
+    }*/
 
     @Test
     public void size() throws Exception {
