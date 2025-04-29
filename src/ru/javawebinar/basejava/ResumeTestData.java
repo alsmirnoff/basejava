@@ -33,8 +33,8 @@ public class ResumeTestData {
 
         resume.addSection(SectionType.EDUCATION, 
             new OrganizationSection(
-                new Organization("Institute", "non-null",
-                    new Organization.Position(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", "non-null"),
+                new Organization("Institute", null,
+                    new Organization.Position(1996, Month.JANUARY, 2000, Month.DECEMBER, "aspirant", null),
                     new Organization.Position(2001, Month.MARCH, 2005, Month.JANUARY, "student", "IT facultet")),
                 new Organization("Organization12", "http://Organization12.ru"))
         );
